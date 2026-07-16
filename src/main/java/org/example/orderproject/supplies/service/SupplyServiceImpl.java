@@ -18,6 +18,27 @@ public class SupplyServiceImpl implements SupplyService{
     }
 
     @Override
+    public String createSupplyNo() {
+        String supplyNo= supplyMapper.selectLastItemId();
+
+        if(supplyNo == null){
+            return "SP-001";
+        }
+
+        int number= Integer.parseInt(supplyNo.substring(3));
+
+        return String.format("SP-%03d", number + 1);
+
+    }
+
+    @Override
+    public boolean itemNameCheck(String itemName) {
+        int count= supplyMapper.itemNameCheck(itemName);
+
+        return count == 0;
+    }
+
+    @Override
     public int supplyInsert(SupplyDTO supplyDTO) {
 
         int count= supplyMapper.itemNameCheck(supplyDTO.getItemName());
@@ -27,5 +48,10 @@ public class SupplyServiceImpl implements SupplyService{
         }
 
         return supplyMapper.supplyInsert(supplyDTO);
+    }
+
+    @Override
+    public SupplyDTO supplyDetail(String itemId) {
+        return supplyMapper.supplyDetail(itemId);
     }
 }

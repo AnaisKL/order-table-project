@@ -16,6 +16,12 @@
         ORDER BY item_id DESC
     </select>
 
+    <!-- 비품 번호 자동 생성 -->
+    <select id="selectLastItemId" resultType="String">
+        SELECT MAX(item_id)
+        FROM supply
+    </select>
+
     <!-- 같은 비품이 있는지 조회 -->
     <select id="itemNameCheck" resultType="int">
         SELECT COUNT(*)
@@ -26,7 +32,14 @@
     <!-- 비품 등록 -->
     <insert id="supplyInsert" parameterType="SupplyDTO">
         INSERT INTO supply(item_id, item_name, category, stock)
-        VALUES(#{itemId},#{itemName},#{category}, 0)
+        VALUES(#{itemId},#{itemName},#{category}, #{stock})
     </insert>
+
+    <!-- 상세 페이지 -->
+    <select id="supplyDetail" resultMap="supplyResult">
+        SELECT item_id, item_name, category, stock
+        FROM supply
+        WHERE item_id= #{itemId}
+    </select>
 
 </mapper>

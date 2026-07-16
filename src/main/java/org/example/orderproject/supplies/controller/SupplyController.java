@@ -1,13 +1,12 @@
 package org.example.orderproject.supplies.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.example.orderproject.supplies.dto.SupplyDTO;
 import org.example.orderproject.supplies.service.SupplyService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/supplies")
@@ -22,8 +21,16 @@ public class SupplyController {
      }
 
      @GetMapping("/insert")
-     public String insertForm(){
+     public String insertForm(Model model){
+          String itemId= supplyService.createSupplyNo();
+          model.addAttribute("itemId", itemId);
           return "supply/supplyCreate";
+     }
+
+     @GetMapping("/itemNameCheck")
+     @ResponseBody
+     public boolean itemNameCheck(String itemName){
+          return supplyService.itemNameCheck(itemName);
      }
 
      @PostMapping("/insert")
@@ -31,4 +38,13 @@ public class SupplyController {
           supplyService.supplyInsert(supplyDTO);
           return "redirect:/supplies/list";
      }
+
+     @GetMapping("/{itemId}")
+     public String detail(@PathVariable String itemId, Model model){
+          SupplyDTO supplyDTO= supplyService.supplyDetail(itemId);
+          model.addAttribute("supply", supplyDTO);
+
+          return "supply/supplyDetail";
+     }
+
 }

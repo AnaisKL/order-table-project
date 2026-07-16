@@ -10,7 +10,7 @@
     <div class="container py-5">
         <div class="card shadow-sm p-4 col-md-6 mx-auto">
             <h3 class="mb-4">비품 정보 수정</h3>
-            <form action="/supplies/101" method="POST"> <!-- 실제로는 {item_id} 경로 -->
+            <form id="editForm" action="/supplies/{itemId}" method="post">
                 <!-- 수정시에는 PUT 메서드라는 것을 스프링에게 알려주는 팁 -->
                 <input type="hidden" name="_method" value="PUT">
 

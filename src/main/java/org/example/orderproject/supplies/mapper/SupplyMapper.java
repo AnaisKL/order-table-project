@@ -9,6 +9,8 @@ import java.util.List;
 @Mapper
 public interface SupplyMapper {
     List<SupplyDTO> supplyList();
+    String selectLastItemId();
     int itemNameCheck(@Param("itemName") String itemName);
     int supplyInsert(SupplyDTO supplyDTO);
+    SupplyDTO supplyDetail(String itemId);
 }

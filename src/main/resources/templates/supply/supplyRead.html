@@ -32,10 +32,14 @@
 
                     <tr th:each="supply : ${supplyList}">
                         <td th:text="${supply.itemId}"></td>
-                        <td th:text="${supply.itemName}"></td>
+                        <td>
+                            <a th:href="@{/supplies/{itemId}(itemId=${supply.itemId})}"
+                               th:text="${supply.itemName}">
+                            </a>
+                        </td>
                         <td th:text="${supply.category}"></td>
                         <td th:text="${supply.stock}"></td>
-                        <td><a href="/supply-edit/101" class="btn btn-sm btn-outline-warning">수정</a></td>
+                        <td><a th:href="@{/supplies/{itemId}/edit(itemId=${supply.itemId})}" class="btn btn-sm btn-outline-warning">수정</a></td>
                     </tr>
                 </tbody>
             </table>
