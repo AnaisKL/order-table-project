@@ -1,4 +1,7 @@
 const itemNameCheckBtn= document.querySelector("#itemNameCheckBtn");
+const insertForm= document.querySelector("#insertForm");
+
+let itemNameChecked= false;
 
 itemNameCheckBtn.addEventListener("click", () => {
     const itemName = document.querySelector("[name='itemName']").value.trim();
@@ -16,10 +19,22 @@ itemNameCheckBtn.addEventListener("click", () => {
             if(result){
                 message.textContent = "등록 가능한 비품입니다.";
                 message.style.color = "blue";
+
+                itemNameChecked= true;
             }else{
                 message.textContent = "이미 등록된 비품입니다.";
                 message.style.color = "red";
+
+                itemNameChecked= false;
             }
 
         });
-})
+});
+
+insertForm.addEventListener("submit", (e) => {
+    if (!itemNameChecked) {
+        alert("중복 체크를 해주세요");
+        e.preventDefault();
+    }
+
+});

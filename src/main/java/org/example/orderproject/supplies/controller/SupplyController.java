@@ -36,7 +36,7 @@ public class SupplyController {
      @PostMapping("/insert")
      public String supplyInsert(SupplyDTO supplyDTO){
           supplyService.supplyInsert(supplyDTO);
-          return "redirect:/supplies/list";
+          return "redirect:/supplies/list?message=insert";
      }
 
      @GetMapping("/{itemId}")
@@ -59,13 +59,13 @@ public class SupplyController {
      @PostMapping("/{itemId}")
      public String supplyUpdate(SupplyDTO supplyDTO){
           supplyService.supplyUpdate(supplyDTO);
-          return "redirect:/supplies/list";
+          return "redirect:/supplies/list?message=update";
      }
 
      @PostMapping("/{itemId}/delete")
      public String supplyDelete(@PathVariable String itemId){
           supplyService.supplyDelete(itemId);
-          return "redirect:/supplies/list";
+          return "redirect:/supplies/list?message=delete";
      }
 
 }
