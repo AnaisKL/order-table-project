@@ -13,8 +13,8 @@
             <a th:href="@{/supplies/insert}" class="btn btn-primary">신규 등록</a>
         </div>
         <div class="card shadow-sm p-3">
-            <table class="table table-hover">
-                <thead class="table-light">
+            <table class="table table-hover text-center" style="table-layout: fixed;">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>비품명</th>
@@ -30,7 +30,7 @@
                         </td>
                     </tr>
 
-                    <tr th:each="supply : ${supplyList}">
+                    <tr th:each="supply : ${supplyList}" class="text-center">
                         <td th:text="${supply.itemId}"></td>
                         <td>
                             <a th:href="@{/supplies/{itemId}(itemId=${supply.itemId})}"
@@ -39,7 +39,14 @@
                         </td>
                         <td th:text="${supply.category}"></td>
                         <td th:text="${supply.stock}"></td>
-                        <td><a th:href="@{/supplies/{itemId}/edit(itemId=${supply.itemId})}" class="btn btn-sm btn-outline-warning">수량 수정</a></td>
+                        <td>
+                            <a th:href="@{/supplies/{itemId}/edit(itemId=${supply.itemId})}" class="btn btn-sm btn-outline-warning me-2">수량 수정</a>
+                            <form th:action="@{/supplies/{itemId}/delete(itemId=${supply.itemId})}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">
+                                    비품 삭제
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

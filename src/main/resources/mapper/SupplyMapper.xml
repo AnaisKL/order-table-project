@@ -44,9 +44,15 @@
 
     <!-- 수정 -->
     <update id="supplyUpdate" parameterType="SupplyDTO">
-        UPDATE SET supply(stock)
-        VALUES(#{stock})
+        UPDATE supply
+        SET stock= #{stock}
         WHERE item_id= #{itemId}
     </update>
+
+    <!-- 삭제 -->
+    <delete id="supplyDelete" parameterType="String">
+        DELETE FROM supply
+        WHERE item_id= #{itemId}
+    </delete>
 
 </mapper>

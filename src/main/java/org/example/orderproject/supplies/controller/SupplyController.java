@@ -56,4 +56,16 @@ public class SupplyController {
           return "supply/supplyEdit";
      }
 
+     @PostMapping("/{itemId}")
+     public String supplyUpdate(SupplyDTO supplyDTO){
+          supplyService.supplyUpdate(supplyDTO);
+          return "redirect:/supplies/list";
+     }
+
+     @PostMapping("/{itemId}/delete")
+     public String supplyDelete(@PathVariable String itemId){
+          supplyService.supplyDelete(itemId);
+          return "redirect:/supplies/list";
+     }
+
 }

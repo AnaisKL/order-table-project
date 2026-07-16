@@ -59,4 +59,9 @@ public class SupplyServiceImpl implements SupplyService{
     public int supplyUpdate(SupplyDTO supplyDTO) {
         return supplyMapper.supplyUpdate(supplyDTO);
     }
+
+    @Override
+    public int supplyDelete(String itemId) {
+        return supplyMapper.supplyDelete(itemId);
+    }
 }

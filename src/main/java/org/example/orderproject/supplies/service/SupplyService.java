@@ -11,4 +11,5 @@ public interface SupplyService {
     boolean itemNameCheck(String itemName);
     SupplyDTO supplyDetail(String itemId);
     int supplyUpdate(SupplyDTO supplyDTO);
+    int supplyDelete(String itemId);
 }
