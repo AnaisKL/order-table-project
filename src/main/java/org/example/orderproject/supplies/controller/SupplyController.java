@@ -47,4 +47,13 @@ public class SupplyController {
           return "supply/supplyDetail";
      }
 
+     @GetMapping("/{itemId}/edit")
+     public String editForm(@PathVariable String itemId, Model model){
+          SupplyDTO supplyDTO= supplyService.supplyDetail(itemId);
+
+          model.addAttribute("supply", supplyDTO);
+
+          return "supply/supplyEdit";
+     }
+
 }

@@ -13,4 +13,5 @@ public interface SupplyMapper {
     int itemNameCheck(@Param("itemName") String itemName);
     int supplyInsert(SupplyDTO supplyDTO);
     SupplyDTO supplyDetail(String itemId);
+    int supplyUpdate(SupplyDTO supplyDTO);
 }

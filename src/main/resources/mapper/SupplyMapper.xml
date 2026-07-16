@@ -42,4 +42,11 @@
         WHERE item_id= #{itemId}
     </select>
 
+    <!-- 수정 -->
+    <update id="supplyUpdate" parameterType="SupplyDTO">
+        UPDATE SET supply(stock)
+        VALUES(#{stock})
+        WHERE item_id= #{itemId}
+    </update>
+
 </mapper>

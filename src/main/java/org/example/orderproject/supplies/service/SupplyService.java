@@ -10,4 +10,5 @@ public interface SupplyService {
     int supplyInsert(SupplyDTO supplyDTO);
     boolean itemNameCheck(String itemName);
     SupplyDTO supplyDetail(String itemId);
+    int supplyUpdate(SupplyDTO supplyDTO);
 }

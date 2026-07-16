@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,26 +9,30 @@
 <body class="bg-light">
     <div class="container py-5">
         <div class="card shadow-sm p-4 col-md-6 mx-auto">
-            <h3 class="mb-4">비품 정보 수정</h3>
-            <form id="editForm" action="/supplies/{itemId}" method="post">
-                <!-- 수정시에는 PUT 메서드라는 것을 스프링에게 알려주는 팁 -->
-                <input type="hidden" name="_method" value="PUT">
-
+            <h3 class="mb-4">수량 수정</h3>
+            <form id="editForm" th:action="@{/supplies/{itemId}(itemId=${supply.itemId})}" method="post">
+                <input type="hidden" name="itemId" th:value="${supply.itemId}">
+                <input type="hidden" name="itemName" th:value="${supply.itemName}">
+                <input type="hidden" name="category" th:value="${supply.category}">
+                <div class="mb-3">
+                    <label class="form-label">비품 번호</label>
+                    <input type="text" class="form-control bg-light" th:value="${supply.itemId}" readonly>
+                </div>
                 <div class="mb-3">
                     <label class="form-label">비품명</label>
-                    <input type="text" name="itemName" class="form-control" value="케이블 타이">
+                    <input type="text" class="form-control bg-light" th:value="${supply.itemName}" readonly>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">카테고리</label>
-                    <input type="text" name="category" class="form-control" value="사무용품">
+                    <input type="text" class="form-control bg-light" th:value="${supply.category}" readonly>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">수정할 재고</label>
-                    <input type="number" name="stock" class="form-control" value="15">
+                    <input type="number" name="stock" class="form-control" th:value="${supply.stock}">
                 </div>
                 <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-warning">수정 완료</button>
-                    <a href="/supplies" class="btn btn-secondary">취소</a>
+                    <a th:href="@{/supplies/list}" class="btn btn-secondary">취소</a>
                 </div>
             </form>
         </div>
