@@ -7,6 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/employees")
 @RequiredArgsConstructor
@@ -62,5 +66,22 @@ public class EmployeeController {
     public String employeeDelete(@PathVariable String employeeId){
         employeeService.employeeDelete(employeeId);
         return "redirect:/employees/list";
+    }
+
+    @GetMapping("/departments")
+    public String getEmployeesByDepartment(Model model) {
+        // 1. 서비스로부터 전체 직원 리스트를 가져옵니다.
+        List<EmployeeDTO> allEmployees = employeeService.employeeList(); // (기존에 구현된 전체 목록 메서드 사용)
+
+        // 2. Java Stream을 이용해 부서(department)별로 직원들을 그룹화합니다.
+        // 결과 구조: Map<부서명, 소속직원리스트>
+        Map<String, List<EmployeeDTO>> deptGroup = allEmployees.stream()
+                .filter(emp -> emp.getDepartment() != null && !emp.getDepartment().trim().isEmpty()) // 부서명이 비어있지 않은 경우만
+                .collect(Collectors.groupingBy(EmployeeDTO::getDepartment));
+
+        // 3. Thymeleaf 템플릿에 데이터를 전달합니다.
+        model.addAttribute("deptGroup", deptGroup);
+
+        return "employee/department-list"; // 새로 만들 HTML 파일명
     }
 }

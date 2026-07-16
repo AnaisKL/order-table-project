@@ -16,6 +16,9 @@
             <a th:href="@{/employees/write}" class="btn btn-primary">
                 직원 등록
             </a>
+            <a th:href="@{/employees/departments}" class="btn btn-primary" style="background-color: #28a745; border-color: #28a745; margin-left: 10px;">
+                🏢 부서별로 보기
+            </a>
         </div>
         <div th:if="${param.error != null and param.error[0] == 'duplicate'}"
              style="color: #e74c3c; background-color: #fde8e7; padding: 10px; border-radius: 6px; margin-bottom: 15px; font-weight: bold;">

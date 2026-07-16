@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>부서별 직원 현황</title>
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <style>
+        .dept-card {
+            background: #fff;
+            border: 1px solid #e1e4e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .dept-title {
+            font-size: 1.3rem;
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .employee-sub-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .employee-sub-table th, .employee-sub-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .employee-sub-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .badge {
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2>🏢 부서별 직원 관리 현황</h2>
+            <a th:href="@{/employees/list}" class="btn btn-secondary" style="text-decoration: none; padding: 8px 16px; border: 1px solid #ccc; border-radius: 4px;">전체 목록 돌아가기</a>
+        </div>
+        <div th:if="${#maps.isEmpty(deptGroup)}" style="text-align: center; padding: 50px 0; color: #888;">
+            등록된 부서 정보가 없습니다.
+        </div>
+        <div th:each="entry : ${deptGroup}" class="dept-card">
+            <div class="dept-title">
+                <span th:text="${entry.key}">부서명</span>
+                <span class="badge" th:text="${entry.value.size() + '명'}">0명</span>
+            </div>
+            <table class="employee-sub-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">사번</th>
+                        <th style="width: 30%;">이름</th>
+                        <th style="width: 35%;">연락처</th>
+                        <th style="width: 15%;">관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="emp : ${entry.value}">
+                        <td th:text="${emp.employeeId}" style="font-family: monospace; font-weight: bold;">사번</td>
+                        <td th:text="${emp.name}">이름</td>
+                        <td th:text="${emp.contact}">연락처</td>
+                        <td>
+                            <a th:href="@{/employees/edit/{id}(id=${emp.employeeId})}" style="color: #007bff; text-decoration: none; font-size: 0.9rem;">조회/수정</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</body>
+</html>
