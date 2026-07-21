@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비품 신청</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="card shadow-sm p-4 col-md-6 mx-auto">
+            <h3 class="mb-4">비품 신규 신청</h3>
+            <form th:action="@{/orders/insert}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">사번</label>
+                    <input type="text" name="employeeId" class="form-control"
+                           placeholder="사번을 입력해 주세요" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">비품 번호</label>
+                    <input type="text" name="itemId" class="form-control"
+                           placeholder="비품 번호를 입력해 주세요" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">신청 수량</label>
+                    <input type="number" name="requestQty" class="form-control"
+                           value="1" min="1" required>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">신청하기</button>
+                    <a th:href="@{/orders/list}" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

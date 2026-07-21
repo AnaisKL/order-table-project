@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신청 상태 변경</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="card shadow-sm p-4 col-md-6 mx-auto">
+            <h3 class="mb-4">신청 상태 변경</h3>
+            <form th:action="@{/orders/{orderId}(orderId=${order.orderId})}" method="post">
+                <input type="hidden" name="orderId" th:value="${order.orderId}">
+                <div class="mb-3">
+                    <label class="form-label">신청 번호</label>
+                    <input type="text" class="form-control bg-light" th:value="${order.orderId}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">사번</label>
+                    <input type="text" class="form-control bg-light" th:value="${order.employeeId}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">비품 번호</label>
+                    <input type="text" class="form-control bg-light" th:value="${order.itemId}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">신청 수량</label>
+                    <input type="number" class="form-control bg-light" th:value="${order.requestQty}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">변경할 상태</label>
+                    <select name="status" class="form-select" required>
+                        <option value="">상태 선택</option>
+                        <option value="대기중" th:selected="${order.status == '대기중'}">대기중</option>
+                        <option value="처리중" th:selected="${order.status == '처리중'}">처리중</option>
+                        <option value="지급 완료" th:selected="${order.status == '지급 완료'}">지급 완료</option>
+                        <option value="반려" th:selected="${order.status == '반려'}">반려</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-warning">변경 완료</button>
+                    <a th:href="@{/orders/list}" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
