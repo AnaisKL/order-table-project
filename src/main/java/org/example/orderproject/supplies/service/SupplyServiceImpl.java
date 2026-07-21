@@ -1,8 +1,8 @@
-package org.example.orderproject.service;
+package org.example.orderproject.supplies.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.orderproject.dto.SupplyDTO;
-import org.example.orderproject.mapper.SupplyMapper;
+import org.example.orderproject.supplies.dto.SupplyDTO;
+import org.example.orderproject.supplies.mapper.SupplyMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,5 +15,53 @@ public class SupplyServiceImpl implements SupplyService{
     @Override
     public List<SupplyDTO> supplyList() {
         return supplyMapper.supplyList();
+    }
+
+    @Override
+    public String createSupplyNo() {
+        String supplyNo= supplyMapper.selectLastItemId();
+
+        if(supplyNo == null){
+            return "SP-001";
+        }
+
+        int number= Integer.parseInt(supplyNo.substring(3));
+
+        return String.format("SP-%03d", number + 1);
+
+    }
+
+    @Override
+    public boolean itemNameCheck(String itemName) {
+        int count= supplyMapper.itemNameCheck(itemName);
+
+        return count == 0;
+    }
+
+    @Override
+    public int supplyInsert(SupplyDTO supplyDTO) {
+
+        int count= supplyMapper.itemNameCheck(supplyDTO.getItemName());
+
+        if(count > 0) {
+            throw new IllegalArgumentException("이미 존재하는 비품입니다.");
+        }
+
+        return supplyMapper.supplyInsert(supplyDTO);
+    }
+
+    @Override
+    public SupplyDTO supplyDetail(String itemId) {
+        return supplyMapper.supplyDetail(itemId);
+    }
+
+    @Override
+    public int supplyUpdate(SupplyDTO supplyDTO) {
+        return supplyMapper.supplyUpdate(supplyDTO);
+    }
+
+    @Override
+    public int supplyDelete(String itemId) {
+        return supplyMapper.supplyDelete(itemId);
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.orderproject.mapper.SupplyMapper">
+<mapper namespace="org.example.orderproject.supplies.mapper.SupplyMapper">
 
     <resultMap id="supplyResult" type="SupplyDTO">
         <id property="itemId" column="item_id" />
@@ -15,5 +15,44 @@
         FROM supply
         ORDER BY item_id DESC
     </select>
+
+    <!-- 비품 번호 자동 생성 -->
+    <select id="selectLastItemId" resultType="String">
+        SELECT MAX(item_id)
+        FROM supply
+    </select>
+
+    <!-- 같은 비품이 있는지 조회 -->
+    <select id="itemNameCheck" resultType="int">
+        SELECT COUNT(*)
+        FROM supply
+        WHERE item_name= #{itemName}
+    </select>
+
+    <!-- 비품 등록 -->
+    <insert id="supplyInsert" parameterType="SupplyDTO">
+        INSERT INTO supply(item_id, item_name, category, stock)
+        VALUES(#{itemId},#{itemName},#{category}, #{stock})
+    </insert>
+
+    <!-- 상세 페이지 -->
+    <select id="supplyDetail" resultMap="supplyResult">
+        SELECT item_id, item_name, category, stock
+        FROM supply
+        WHERE item_id= #{itemId}
+    </select>
+
+    <!-- 수정 -->
+    <update id="supplyUpdate" parameterType="SupplyDTO">
+        UPDATE supply
+        SET stock= #{stock}
+        WHERE item_id= #{itemId}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="supplyDelete" parameterType="String">
+        DELETE FROM supply
+        WHERE item_id= #{itemId}
+    </delete>
 
 </mapper>

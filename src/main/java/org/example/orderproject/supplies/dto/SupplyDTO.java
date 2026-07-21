@@ -1,4 +1,4 @@
-package org.example.orderproject.dto;
+package org.example.orderproject.supplies.dto;
 
 import lombok.*;
 

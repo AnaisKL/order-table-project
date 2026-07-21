@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비품 상세 조회</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container py-5">
+        <div class="card shadow-sm p-4 col-md-6 mx-auto">
+
+            <h3 class="mb-4">비품 상세 정보</h3>
+
+            <div class="mb-3">
+                <label class="form-label">비품 번호</label>
+                <input type="text"
+                       class="form-control bg-light"
+                       th:value="${supply.itemId}"
+                       readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">비품명</label>
+                <input type="text"
+                       class="form-control bg-light"
+                       th:value="${supply.itemName}"
+                       readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">카테고리</label>
+                <input type="text"
+                       class="form-control bg-light"
+                       th:value="${supply.category}"
+                       readonly>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">현재 수량</label>
+                <input type="number"
+                       class="form-control bg-light"
+                       th:value="${supply.stock}"
+                       readonly>
+            </div>
+
+            <div class="d-flex gap-2">
+                <a th:href="@{/supplies/list}" class="btn btn-secondary">
+                    목록으로
+                </a>
+
+                <a th:href="@{/supplies/{itemId}/edit(itemId=${supply.itemId})}"
+                   class="btn btn-warning">
+                    수정
+                </a>
+
+                <button type="button" class="btn btn-danger">
+                    삭제
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

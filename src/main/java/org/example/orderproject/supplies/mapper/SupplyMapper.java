@@ -1,11 +1,18 @@
-package org.example.orderproject.mapper;
+package org.example.orderproject.supplies.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.example.orderproject.dto.SupplyDTO;
+import org.apache.ibatis.annotations.Param;
+import org.example.orderproject.supplies.dto.SupplyDTO;
 
 import java.util.List;
 
 @Mapper
 public interface SupplyMapper {
     List<SupplyDTO> supplyList();
+    String selectLastItemId();
+    int itemNameCheck(@Param("itemName") String itemName);
+    int supplyInsert(SupplyDTO supplyDTO);
+    SupplyDTO supplyDetail(String itemId);
+    int supplyUpdate(SupplyDTO supplyDTO);
+    int supplyDelete(@Param("itemId") String itemId);
 }

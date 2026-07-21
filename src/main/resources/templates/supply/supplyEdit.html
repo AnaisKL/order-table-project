@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비품 수정 페이지</title> <!--기존 비품 재고 수정 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-$END$
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="card shadow-sm p-4 col-md-6 mx-auto">
+            <h3 class="mb-4">수량 수정</h3>
+            <form id="editForm" th:action="@{/supplies/{itemId}(itemId=${supply.itemId})}" method="post">
+                <input type="hidden" name="itemId" th:value="${supply.itemId}">
+                <input type="hidden" name="itemName" th:value="${supply.itemName}">
+                <input type="hidden" name="category" th:value="${supply.category}">
+                <div class="mb-3">
+                    <label class="form-label">비품 번호</label>
+                    <input type="text" class="form-control bg-light" th:value="${supply.itemId}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">비품명</label>
+                    <input type="text" class="form-control bg-light" th:value="${supply.itemName}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">카테고리</label>
+                    <input type="text" class="form-control bg-light" th:value="${supply.category}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">수정할 재고</label>
+                    <input type="number" name="stock" class="form-control" th:value="${supply.stock}">
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-warning">수정 완료</button>
+                    <a th:href="@{/supplies/list}" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
