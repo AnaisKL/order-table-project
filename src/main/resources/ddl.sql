@@ -16,17 +16,10 @@ CREATE TABLE Supply (
 
 -- 3. 신청 내역 (Order_Request) 테이블 생성
 CREATE TABLE Order_Request (
-                               Order_ID NUMBER PRIMARY KEY,          -- 신청 건 고유 번호 (기본키)
+                               Order_ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,          -- 신청 건 고유 번호 (기본키)
                                Employee_ID VARCHAR2(20),             -- 신청 직원 사번
                                Item_ID VARCHAR2(20),                 -- 신청 비품 번호
                                Request_Qty NUMBER NOT NULL,          -- 신청 수량 (필수 입력)
                                Order_Date DATE DEFAULT SYSDATE,      -- 신청 시간 (자동 입력)
-                               Status VARCHAR2(20) DEFAULT '대기중', -- 진행 상태 (기본값 '대기중')
-
-    -- 다른 테이블과의 연결 고리 (외래키 설정)
-                               FOREIGN KEY (Employee_ID) REFERENCES Employee(Employee_ID),
-                               FOREIGN KEY (Item_ID) REFERENCES Supply(Item_ID)
+                               Status VARCHAR2(20) DEFAULT '대기중' -- 진행 상태 (기본값 '대기중')
 );
-
-select *
-from Order_Request;

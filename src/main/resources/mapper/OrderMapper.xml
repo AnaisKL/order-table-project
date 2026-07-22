@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.orderproject.order.mapper.OrderMapper">
+
+    <resultMap id="orderResult" type="OrderDTO">
+        <id property="orderId" column="order_id" />
+        <result property="employeeId" column="employee_id" />
+        <result property="itemId" column="item_id" />
+        <result property="requestQty" column="request_qty" />
+        <result property="orderDate" column="order_date" />
+        <result property="status" column="status" />
+    </resultMap>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO order_request (employee_id, item_id, request_qty)
+        VALUES (#{employeeId}, #{itemId}, #{requestQty})
+    </insert>
+
+    <select id="findAll" resultMap="orderResult">
+        SELECT order_id, employee_id, item_id, request_qty, order_date, status
+        FROM order_request
+        ORDER BY order_id DESC
+    </select>
+
+    <select id="findById" resultMap="orderResult">
+        SELECT order_id, employee_id, item_id, request_qty, order_date, status
+        FROM order_request
+        WHERE order_id = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE order_request
+        SET status = #{status}
+        WHERE order_id = #{orderId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM order_request
+        WHERE order_id = #{id}
+    </delete>
+
+</mapper>
