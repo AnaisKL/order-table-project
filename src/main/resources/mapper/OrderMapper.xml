@@ -11,7 +11,7 @@
         <result property="status" column="status" />
     </resultMap>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="orderId">
+    <insert id="save" useGeneratedKeys="true" keyProperty="orderId" keyColumn="order_id">
         INSERT INTO order_request (employee_id, item_id, request_qty)
         VALUES (#{employeeId}, #{itemId}, #{requestQty})
     </insert>
