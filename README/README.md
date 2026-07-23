@@ -46,6 +46,7 @@
 ## order 주문 테이블
 ![주문 조회 화면](image/order-list.png)
 ![주문 등록 화면](image/order-register.png)
+![주문 수정 화면](image/order-update.png)
 
 # 각 테이블별 기능
 ## employee
@@ -61,3 +62,5 @@
 비품 수량 수정
 ## order
 비품 등록(사번, 비품 번호 미입력시 경고문 출력)
+상품 삭제시 경고 문구 출력
+상품 신청 상태 변경창

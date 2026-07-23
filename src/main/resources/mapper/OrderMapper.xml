@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.orderproject.order.mapper.OrderMapper">
 
-    <resultMap id="orderResult" type="OrderDTO">
+    <resultMap id="orderResult" type="org.example.orderproject.order.dto.OrderDTO">
         <id property="orderId" column="order_id" />
         <result property="employeeId" column="employee_id" />
         <result property="itemId" column="item_id" />
@@ -11,7 +11,7 @@
         <result property="status" column="status" />
     </resultMap>
 
-    <insert id="save" useGeneratedKeys="true" keyProperty="orderId">
+    <insert id="save" useGeneratedKeys="true" keyProperty="orderId" keyColumn="order_id">
         INSERT INTO order_request (employee_id, item_id, request_qty)
         VALUES (#{employeeId}, #{itemId}, #{requestQty})
     </insert>
